@@ -143,16 +143,16 @@ function findOutermostElementStart(html: string, markerIndex: number): number {
 }
 
 function findTestimonialsSectionStart(html: string): number {
-  const idMatch = html.match(/<div[^>]*\bid=["']itesti-section["'][^>]*>/i);
+  const idMatch = html.match(/<(?:section|div)[^>]*\bid=["']itesti-section["'][^>]*>/i);
   if (idMatch?.index !== undefined) return idMatch.index;
 
-  const legacyId = html.match(/<div[^>]*\bid=["']itestimonials["'][^>]*>/i);
+  const legacyId = html.match(/<(?:section|div)[^>]*\bid=["']itestimonials["'][^>]*>/i);
   if (legacyId?.index !== undefined) return legacyId.index;
 
-  const tsSection = html.match(/<div[^>]*\bts-section\b[^>]*>/i);
+  const tsSection = html.match(/<(?:section|div)[^>]*\bts-section\b[^>]*>/i);
   if (tsSection?.index !== undefined) return tsSection.index;
 
-  const classMatch = html.match(/<div[^>]*\btestimonials-section\b[^>]*>/i);
+  const classMatch = html.match(/<(?:section|div)[^>]*\btestimonials-section\b[^>]*>/i);
   if (classMatch?.index !== undefined) return classMatch.index;
 
   const commentMatch = html.match(
@@ -256,7 +256,7 @@ function extractHeaderHtml(sectionHtml: string, cards: string[]): string {
 }
 
 function extractSectionClassName(sectionHtml: string): string {
-  const classMatch = sectionHtml.match(/^<div[^>]*class="([^"]*)"/i);
+  const classMatch = sectionHtml.match(/^<(?:section|div)[^>]*class="([^"]*)"/i);
   return classMatch?.[1]?.trim() ?? "w-100 border-top cutter-section testimonials-section";
 }
 
